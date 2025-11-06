@@ -1,0 +1,37 @@
+#sizeSmall,
+#sizeSmall2 {
+  font-size: 20px;
+}
+
+#sizeMedium,
+#sizeMedium2 {
+  font-size: 40px;
+}
+
+#sizeLarge,
+#sizeLarge2 {
+  font-size: 60px;
+}
+
+#sizeXL,
+#sizeXL2 {
+  font-size: 90px;
+}
+
+#sizeXXL,
+#sizeXXL2 {
+  font-size: 120px;
+}
+
+#sizeHuge,
+#sizeHuge2 {
+  font-size: 160px;
+}
+
+/* layout styling */
+#container {
+  display: flex;
+  gap: 16px;
+  padding: 40px;
+  font-family: Arial, sans-serif;
+}

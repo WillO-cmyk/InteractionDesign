@@ -1,0 +1,76 @@
+body {
+background-color: salmon;
+display: flex;
+flex-direction: column;
+}
+
+
+
+#container {
+	width: 100%;
+	display: flex;
+	flex-wrap: wrap;
+}
+
+h1 {
+	font-size: 300px;
+		font-family: helvetica;
+		margin-bottom: -100px;
+		margin-top: 0px;
+}
+
+
+
+
+#Radfontr {font-family: "rad", sans-serif;
+font-weight: 400;
+font-size: 200px;
+font-style: normal;
+}
+
+#Radfonta {font-family: "rad", sans-serif;
+font-weight: 400;
+font-size: 200px;
+font-style: normal;
+}
+
+#Radfontd {font-family: "rad", sans-serif;
+font-weight: 400;
+font-size: 200px;
+font-style: normal;
+}
+
+#Radfontf {font-family: "rad", sans-serif;
+font-weight: 400;
+font-size: 200px;
+font-style: normal;
+}
+
+#Radfonto {font-family: "rad", sans-serif;
+font-weight: 400;
+font-size: 200px;
+font-style: normal;
+animation: spin 2.00s linear infinite;
+}
+
+@keyframes spin {
+	from { transform: rotate(0deg); }
+	to {transform: rotate(360deg);}
+}
+
+#Radfontn {font-family: "rad", sans-serif;
+font-weight: 400;
+font-size: 200px;
+font-style: normal;
+}
+
+#Radfontt {font-family: "rad", sans-serif;
+font-weight: 400;
+font-size: 200px;
+font-style: normal;
+}
+
+p1 {font-family: "rad", sans-serif;
+font-weight: 400;
+font-size: 50px;
+font-style: normal;}
