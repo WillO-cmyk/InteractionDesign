@@ -1,0 +1,54 @@
+/////#LetterE
+{
+font-family: "rad", sans-serif;	font-weight: 400;
+	font-size: 50px;
+	font-style: normal;
+	animation: jummp;
+	overflow: hidden;
+}
+body {
+/*    display: flex;
+    justify-content: center;
+    align-items: center;*/
+    height: 100vh;
+    width: 100%;
+    background-color: #f0f0f0;
+   
+}
+
+.containerskater {
+	width: 100%;
+	height: 150px;
+	position: absolute;
+	top: 50%;
+	bottom: 50%;
+	transform: translate(0%, -50%);
+}
+
+.containerletter{
+	width: 100%;
+	height: 150px;
+	position: absolute;
+	top: 50%;
+	bottom: 50%;
+	transform: translate(0%, -50%);
+
+	text-align: center;
+}
+
+
+.LetterE {font-family: "rad", sans-serif;	font-weight: 400;
+	font-size: 50px;
+  	position: relative;
+  	left: 0;
+    animation: jump 4s ease-in-out infinite;
+}
+
+
+@keyframes jump {
+    0% { left: -10%;}
+    40% { bottom: 0px; }
+    50% { bottom: 150px;}
+    60% { bottom: 0px;}
+    100% { left: 110%;}
+}
