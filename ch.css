@@ -1,0 +1,89 @@
+/* ===== Page layout ===== */
+body {
+  font-family: sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  gap: 16px;
+  height: 100vh;
+  overflow: hidden; /* no scrollbars */
+}
+
+button {
+  padding: 8px 16px;
+  cursor: pointer;
+}
+
+/* ===== Scene container ===== */
+.scene {
+  width: 250px;
+  height: 250px;
+  border: 1px solid #ccc;
+  position: relative;
+  overflow: visible;
+  background: #f8f8f8;
+    
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  position: relative;
+}
+
+/* Wrapper for animation */
+.skater-wrapper {
+  position: relative;
+  width: 140px;
+  height: 140px;
+
+}
+
+/* Skater image */
+.skater {
+  position: absolute;
+  width: 140px;   /* smaller so it fits comfortably */
+  left: 50%;
+  transform: translateX(-50%); /* center horizontally */
+  bottom: 3px;   /* height above the board */
+  z-index: 2;
+}
+
+/* Board image */
+.board {
+  position: absolute;
+  bottom: 0;   /* adjust this to align under feet */
+  left: 50%;
+  width: 140px;
+  transform-origin: center center;
+  transform: translateX(-50%);
+  z-index: 1;
+}
+
+/* ===== Animation triggers ===== */
+.skater-wrapper.kickflip .skater {
+  animation: skaterJump 0.8s ease-out forwards;
+}
+
+.skater-wrapper.kickflip .board {
+  animation: boardFlip 0.8s ease-out forwards;
+}
+
+/* Skater jump animation */
+@keyframes skaterJump {
+  0%   { transform: translateX(-50%) translateY(0); }
+  20%  { transform: translateX(-50%) translateY(-25px); }
+  50%  { transform: translateX(-50%) translateY(-50px); }
+  80%  { transform: translateX(-50%) translateY(-15px); }
+  100% { transform: translateX(-50%) translateY(0); }
+}
+
+
+/* Board flip animation */
+@keyframes boardFlip {
+  0%   { transform: translateX(-50%) translateY(0) rotateZ(0deg); }
+  25%  { transform: translateX(-50%) translateY(-20px) rotateZ(180deg); }
+  50%  { transform: translateX(-50%) translateY(-40px) rotateZ(360deg); }
+  75%  { transform: translateX(-50%) translateY(-20px) rotateZ(540deg); }
+  100% { transform: translateX(-50%) translateY(0) rotateZ(720deg); }
+}
