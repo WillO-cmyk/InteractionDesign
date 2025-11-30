@@ -1,39 +1,58 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Character Set Higlights</title>
-	<link rel="stylesheet" href="ch.css">
-	<link rel="stylesheet" href="https://use.typekit.net/lqa7gax.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Character Highlight</title>
 
+  <!-- RAD font kit (same as splash page) -->
+  <link rel="stylesheet" href="https://use.typekit.net/lqa7gax.css">
+
+  <!-- Page styles -->
+  <link rel="stylesheet" href="ch.css">
 </head>
 <body>
-	<button id="kickflipBtn">Kickflip</button>
 
+  <h1>Character Highlight</h1>
 
+  <div class="trick-row">
 
+    <!-- Trick I — Image skater -->
+    <div class="trick-card">
+      <div class="trick-frame">
+        <div class="skater-wrapper">
+          <img src="images/skaterB.png" class="skater" alt="Skater">
+          <img src="images/board.png" class="board" alt="Skateboard">
+        </div>
+      </div>
+      <button id="trick1Btn">Trick I</button>
+    </div>
 
-	
+    <!-- Trick II — RAD “6” skater glyph -->
+    <div class="trick-card">
+      <div class="trick-frame">
+        <div id="sixSkater">6</div>
+      </div>
+      <button id="trick2Btn">Trick II</button>
+    </div>
 
-<div class="scene">
-  <div class="skater-wrapper">
-    <img src="images/skaterB.png" class="skater" alt="Skater">
-    <img src="images/board.png" class="board" alt="Skateboard">
+    <!-- Trick III — another RAD glyph (e.g. 8) -->
+    <div class="trick-card">
+      <div class="trick-frame">
+        <div id="blockThree">8</div>
+      </div>
+      <button id="trick3Btn">Trick III</button>
+    </div>
+
   </div>
-</div>
 
+  <p class="full-set">
+    ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789
+  </p>
 
+  <a href="index.html">RETURN TO HOMEPAGE</a>
 
-
-<script src="ch.js"></script>
-<p>
-
-	ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789
-</p>
-
-
-<a href="index.html">RETURN TO HOMEPAGE</a>
-
+  <!-- JS -->
+  <script src="ch.js"></script>
 </body>
 </html>
