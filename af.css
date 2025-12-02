@@ -86,7 +86,7 @@ min-height: 100vh;
 }
 
 .block {
-  background: lab(100% 0.01 -0.01);
+  background: lab( 0.01 -0.01);
   padding: 24px;
   border-radius: 12px;
   box-shadow: 0 4px 18px rgba(0,0,0,0.08);
@@ -112,10 +112,62 @@ min-height: 100vh;
   grid-row: 2 / span 1;     /* bottom */
 }
 
+/* Make ONLY block4 behave differently inside */
 .block4 {
-  grid-column: 1 / span 1; /* left column */
-  grid-row: 2 / span 1;     /* left bottom */
+  align-items: flex-start;    /* override center */
+  justify-content: flex-start;
 }
+
+/* Inner layout so things stack nicely */
+.block4-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Info text at the top of Block 4 */
+.block4-info {
+  font-family: sans-serif;
+  font-size: 16px;
+  line-height: 1.4;
+  margin: 0;
+}
+
+/* Each specimen group (Alphabet / Numbers) */
+.specimen-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+/* Labels: "Alphabet", "Numbers" */
+.specimen-label {
+  font-family: sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: uppercase;
+  opacity: 0.7;
+}
+
+/* The actual samples in your RAD font */
+.specimen {
+  font-family: "rad", sans-serif;
+  letter-spacing: 0.08em;
+}
+
+/* Three different sizes */
+.sample-large {
+  font-size: 64px;
+}
+
+.sample-medium {
+  font-size: 40px;
+}
+
+.sample-small {
+  font-size: 24px;
+}
+
 
 /* #container{display: flex;
 	flex-wrap: wrap;
