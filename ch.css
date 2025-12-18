@@ -366,3 +366,10 @@ body {
     align-items: flex-start;
   }
 }
+
+@media (min-width: 1600px) {
+  .page-shell { max-width: 1400px; }
+  .spotlight { gap: 24px; }
+  .spotlight-letter { font-size: clamp(140px, 18vw, 260px); }
+  .specimen-hero h1 { font-size: clamp(32px, 5vw, 52px); }
+}
