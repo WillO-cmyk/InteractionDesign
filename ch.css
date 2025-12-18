@@ -1,185 +1,368 @@
-/* ===== Base layout ===== */
+:root {
+  --intensity: 1;
+  --surface: #ffffffdd;
+  --border: #0f172a;
+  --accent: #ff5a5f;
+  --shadow: 0 10px 30px rgba(0, 0, 0, 0.22);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
 body {
-  background-color: rgb(77, 235, 211);  /* echo the splash page vibe */
   margin: 0;
-  padding: 20px;
+  font-family: "rad", "Helvetica Neue", Arial, sans-serif;
+  min-height: 100vh;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.7), rgba(255,255,255,0.6)),
+    url("images/skatepark.png") center/cover no-repeat fixed;
+  color: #0f172a;
+}
+
+.page-shell {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: clamp(16px, 4vw, 48px);
+}
+
+.specimen-hero {
+  background: var(--surface);
+  border: 2px solid var(--border);
+  border-radius: 18px;
+  padding: clamp(14px, 3vw, 28px);
+  box-shadow: var(--shadow);
+  margin-bottom: 18px;
+}
+
+.eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 13px;
+  color: #334155;
+  margin: 0 0 4px;
+}
+
+.gradient-text {
+  background: linear-gradient(45deg, #ff3b3b, #ffdd00);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.specimen-hero h1 {
+  margin: 4px 0 8px;
+  font-size: clamp(28px, 5vw, 44px);
+  line-height: 1.05;
+}
+
+.specimen-hero p {
+  margin: 0;
+  color: #1e293b;
+  font-size: 16px;
+}
+
+.control-bar {
   display: flex;
-  flex-direction: column;
   align-items: center;
-  gap: 16px;
+  gap: 12px;
+  background: var(--surface);
+  border: 2px solid var(--border);
+  border-radius: 12px;
+  padding: 10px 14px;
+  box-shadow: var(--shadow);
+  margin-bottom: 16px;
+  flex-wrap: wrap;
 }
 
-h1 {
-  font-family: helvetica, sans-serif;
-  font-size: 48px;
-  margin: 0 0 20px;
+.control-bar label {
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
 }
 
-/* Row of three blocks */
-.trick-row {
-  display: flex;
-  gap: 32px;
-  justify-content: center;
-  margin-top: 20px;
+.control-bar input[type="range"] {
+  flex: 1;
+  min-width: 140px;
 }
 
-.trick-card {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 8px;
+.control-bar .value {
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
 }
 
-/* Box frame */
-.trick-frame {
-  width: 250px;
-  height: 250px;
-  border: 2px solid #000;
-  background: #f8f8f8;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.specimen-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(72px, 1fr));
+  gap: 12px;
+  margin-bottom: 16px;
 }
 
-/* Buttons */
-button {
-  padding: 6px 14px;
-  cursor: pointer;
-  font-family: helvetica, sans-serif;
-}
-
-/* ===== TRICK I — image skater ===== */
-
-.skater-wrapper {
+.specimen-tile {
   position: relative;
-  width: 300px;
-  height: 300px;
+  height: 86px;
+  border-radius: 14px;
+  border: 2px solid var(--border);
+  background: var(--surface);
+  box-shadow: var(--shadow);
+  font-family: "rad", sans-serif;
+  font-weight: 700;
+  font-size: clamp(28px, 3vw, 42px);
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  transition: transform 140ms ease, box-shadow 140ms ease, border-color 160ms ease;
+  color: var(--accent, #ff5a5f);
+  outline: none;
 }
 
-.skater,
-.board {
+.specimen-tile::after {
+  content: attr(data-trick);
   position: absolute;
-  width: 300px;
-  left: 50%;
-  transform: translateX(-50%);
+  bottom: 6px;
+  left: 10px;
+  font-size: 12px;
+  letter-spacing: 0.02em;
+  color: #475569;
+  opacity: 0.85;
 }
 
-.skater {
-  bottom: 3px;
-  z-index: 2;
+.specimen-tile:hover:not(.run):not(.selected),
+.specimen-tile:focus-visible:not(.run):not(.selected) {
+  transform: translateY(-4px);
+  animation: var(--micro-anim) 0.55s ease-out;
+  border-color: var(--accent, #ff5a5f);
 }
 
-.board {
-  bottom: 0;
-  z-index: 1;
-  transform-origin: center;
+.specimen-tile.selected {
+  transform: translateY(-2px) scale(1.02);
+  border-color: var(--accent, #ff5a5f);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.26);
 }
 
-/* Skater animation */
-.skater-wrapper.kickflip .skater {
-  animation: skaterJump 0.8s ease-out forwards;
+.specimen-tile:focus-visible {
+  box-shadow: 0 0 0 3px rgba(255, 90, 95, 0.35), var(--shadow);
 }
 
-.skater-wrapper.kickflip .board {
-  animation: boardFlip 0.8s ease-out forwards;
+.spotlight {
+  display: grid;
+  grid-template-columns: minmax(180px, 280px) 1fr;
+  gap: 18px;
+  align-items: center;
+  background: var(--surface);
+  border: 2px solid var(--border);
+  border-radius: 18px;
+  padding: clamp(14px, 3vw, 26px);
+  box-shadow: var(--shadow);
+  margin-bottom: 18px;
 }
 
-@keyframes skaterJump {
-  0%   { transform: translateX(-50%) translateY(0); }
-  20%  { transform: translateX(-50%) translateY(-25px); }
-  50%  { transform: translateX(-50%) translateY(-50px); }
-  80%  { transform: translateX(-50%) translateY(-15px); }
-  100% { transform: translateX(-50%) translateY(0); }
-}
-
-@keyframes boardFlip {
-  0%   { transform: translateX(-50%) translateY(0) rotate(0deg); }
-  25%  { transform: translateX(-50%) translateY(-20px) rotate(180deg); }
-  50%  { transform: translateX(-50%) translateY(-40px) rotate(360deg); }
-  75%  { transform: translateX(-50%) translateY(-20px) rotate(540deg); }
-  100% { transform: translateX(-50%) translateY(0) rotate(720deg); }
-}
-
-/* ===== TRICK II — RAD 6 glyph ===== */
-
-#sixSkater {
-  display: inline-block;
+.spotlight-letter {
   font-family: "rad", sans-serif;
-  font-weight: 400;
-  font-size: 160px;      /* fits nicely inside 250x250 */
-  font-style: normal;
+  font-weight: 700;
+  font-size: clamp(120px, 18vw, 220px);
   line-height: 1;
-
-  /* spin around the center so it doesn't swing out of the box */
-  transform-origin: center center;
-  text-align: center;
+  text-shadow: 4px 4px 0 #0f172a33;
+  color: var(--accent, #ff5a5f);
+  display: grid;
+  place-items: center;
+  animation: idle-bob 6s ease-in-out infinite alternate;
 }
 
-
-#sixSkater.is-tricking {
-  animation: sixTrick 0.8s ease-in-out forwards;
+.spotlight-letter.run {
+  animation: var(--full-anim) calc(1.1s * var(--intensity)) ease-out;
 }
 
-
-@keyframes sixTrick {
-  /* start: on the ground, no rotation */
-  0% {
-    transform: translateY(0) rotate(0deg);
-  }
-
-  /* going up, no rotation yet */
-  30% {
-    transform: translateY(-40px) rotate(0deg);
-  }
-
-  /* at the apex: start and finish most of the rotation here */
-  50% {
-    transform: translateY(-45px) rotate(270deg);
-  }
-
-  70% {
-    transform: translateY(-40px) rotate(540deg);
-  }
-
-  /* coming down, rotation finished */
-  100% {
-    transform: translateY(0) rotate(7200deg);
-  }
+.spotlight-meta .label {
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-size: 12px;
+  margin: 0 0 6px;
+  color: #475569;
 }
 
+.spotlight-meta .trick-name {
+  font-size: clamp(20px, 3vw, 28px);
+  margin: 0 0 8px;
+}
 
+.spotlight-meta .hint {
+  margin: 0;
+  color: #475569;
+}
 
-
-/* ===== TRICK III — another RAD glyph (8 wobble) ===== */
-
-#blockThree {
+.btn {
   display: inline-block;
-  font-family: "rad", sans-serif;
-  font-weight: 400;
-  font-size: 200px;
-  font-style: normal;
+  padding: 12px 16px;
+  border-radius: 10px;
+  border: 2px solid #ff5a5f;
+  background: white;
+  color: #ff5a5f;
+  text-decoration: none;
+  font-size: 18px;
+  margin: 6px 4px;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
 
-  transform-origin: center bottom;
+.btn:hover {
+  background: #ff5a5f;
+  color: white;
+}
+
+.home-row {
   text-align: center;
+  margin-bottom: 30px;
 }
 
-#blockThree.is-wobbling {
-  animation: wobble 0.9s ease-out forwards;
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 
-@keyframes wobble {
-  0%   { transform: rotate(0deg); }
-  25%  { transform: rotate(-15deg); }
-  50%  { transform: rotate(15deg); }
-  75%  { transform: rotate(-10deg); }
-  100% { transform: rotate(0deg); }
+@keyframes idle-bob {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-6px); }
 }
 
-/* Alphabet line at bottom in RAD */
-.full-set {
-  font-family: "rad", sans-serif;
-  font-weight: 400;
-  font-size: 50px;
-  font-style: normal;
-  margin-top: 24px;
+/* Per-character trick assignments */
+.trick-a { --micro-anim: micro-a; --full-anim: full-a; --accent: #ff5a5f; }
+.trick-b { --micro-anim: micro-b; --full-anim: full-b; --accent: #ffa94d; }
+.trick-c { --micro-anim: micro-c; --full-anim: full-c; --accent: #ffd166; }
+.trick-d { --micro-anim: micro-d; --full-anim: full-d; --accent: #a0e9ff; }
+.trick-e { --micro-anim: micro-e; --full-anim: full-e; --accent: #48cae4; }
+.trick-f { --micro-anim: micro-f; --full-anim: full-f; --accent: #06d6a0; }
+.trick-g { --micro-anim: micro-g; --full-anim: full-g; --accent: #80ed99; }
+.trick-h { --micro-anim: micro-h; --full-anim: full-h; --accent: #73c2fb; }
+.trick-i { --micro-anim: micro-i; --full-anim: full-i; --accent: #64b5f6; }
+.trick-j { --micro-anim: micro-j; --full-anim: full-j; --accent: #bc6ff1; }
+.trick-k { --micro-anim: micro-k; --full-anim: full-k; --accent: #8338ec; }
+.trick-l { --micro-anim: micro-l; --full-anim: full-l; --accent: #ff3b3b; }
+.trick-m { --micro-anim: micro-m; --full-anim: full-m; --accent: #ff6b6b; }
+.trick-n { --micro-anim: micro-n; --full-anim: full-n; --accent: #f06595; }
+.trick-o { --micro-anim: micro-o; --full-anim: full-o; --accent: #ef476f; }
+.trick-p { --micro-anim: micro-p; --full-anim: full-p; --accent: #ff924c; }
+.trick-q { --micro-anim: micro-q; --full-anim: full-q; --accent: #ffd166; }
+.trick-r { --micro-anim: micro-r; --full-anim: full-r; --accent: #06d6a0; }
+.trick-s { --micro-anim: micro-s; --full-anim: full-s; --accent: #118ab2; }
+.trick-t { --micro-anim: micro-t; --full-anim: full-t; --accent: #073b4c; }
+.trick-u { --micro-anim: micro-u; --full-anim: full-u; --accent: #2ec4b6; }
+.trick-v { --micro-anim: micro-v; --full-anim: full-v; --accent: #ffbf69; }
+.trick-w { --micro-anim: micro-w; --full-anim: full-w; --accent: #c77dff; }
+.trick-x { --micro-anim: micro-x; --full-anim: full-x; --accent: #9a8c98; }
+.trick-y { --micro-anim: micro-y; --full-anim: full-y; --accent: #4cc9f0; }
+.trick-z { --micro-anim: micro-z; --full-anim: full-z; --accent: #ff66c4; }
+.trick-0 { --micro-anim: micro-0; --full-anim: full-0; --accent: #00f5d4; }
+.trick-1 { --micro-anim: micro-1; --full-anim: full-1; --accent: #f15bb5; }
+.trick-2 { --micro-anim: micro-2; --full-anim: full-2; --accent: #fee440; }
+.trick-3 { --micro-anim: micro-3; --full-anim: full-3; --accent: #4cc9f0; }
+.trick-4 { --micro-anim: micro-4; --full-anim: full-4; --accent: #4895ef; }
+.trick-5 { --micro-anim: micro-5; --full-anim: full-5; --accent: #b5179e; }
+.trick-6 { --micro-anim: micro-6; --full-anim: full-6; --accent: #ff6f61; }
+.trick-7 { --micro-anim: micro-7; --full-anim: full-7; --accent: #ff9500; }
+.trick-8 { --micro-anim: micro-8; --full-anim: full-8; --accent: #2a9d8f; }
+.trick-9 { --micro-anim: micro-9; --full-anim: full-9; --accent: #264653; }
+
+/* Micro previews */
+@keyframes micro-a { 0%{transform:none;} 50%{transform: translateY(calc(-8px*var(--intensity))) rotate(calc(8deg*var(--intensity)));} 100%{transform:none;} }
+@keyframes micro-b { 0%{transform:none;} 50%{transform: translateX(calc(8px*var(--intensity))) rotate(calc(-6deg*var(--intensity)));} 100%{transform:none;} }
+@keyframes micro-c { 0%{transform:none;} 40%{transform: scale(calc(1.08*var(--intensity))) rotate(calc(-4deg*var(--intensity)));} 100%{transform:none;} }
+@keyframes micro-d { 0%{transform:none;} 50%{transform: rotate(calc(16deg*var(--intensity)));} 100%{transform:none;} }
+@keyframes micro-e { 0%{transform:none;} 60%{transform: translateY(calc(-6px*var(--intensity))) skewX(calc(6deg*var(--intensity)));} 100%{transform:none;} }
+@keyframes micro-f { 0%{transform:none;} 50%{transform: translateX(calc(-8px*var(--intensity))) rotate(calc(5deg*var(--intensity)));} 100%{transform:none;} }
+@keyframes micro-g { 0%{transform:none;} 50%{transform: translate(calc(6px*var(--intensity)), calc(-6px*var(--intensity))) rotate(calc(6deg*var(--intensity)));} 100%{transform:none;} }
+@keyframes micro-h { 0%{transform:none;} 50%{transform: skewY(calc(6deg*var(--intensity))) translateY(calc(-4px*var(--intensity)));} 100%{transform:none;} }
+@keyframes micro-i { 0%{transform:none;} 50%{transform: scale(calc(1.1*var(--intensity))) translateY(calc(-4px*var(--intensity)));} 100%{transform:none;} }
+@keyframes micro-j { 0%{transform:none;} 50%{transform: translateY(calc(-10px*var(--intensity))) rotate(calc(-10deg*var(--intensity)));} 100%{transform:none;} }
+@keyframes micro-k { 0%{transform:none;} 50%{transform: rotate(calc(-12deg*var(--intensity))) translateX(calc(-6px*var(--intensity)));} 100%{transform:none;} }
+@keyframes micro-l { 0%{transform:none;} 50%{transform: translateY(calc(-7px*var(--intensity))) scale(calc(1.06*var(--intensity)));} 100%{transform:none;} }
+@keyframes micro-m { 0%{transform:none;} 50%{transform: translateX(calc(10px*var(--intensity))) translateY(calc(-4px*var(--intensity))) rotate(calc(6deg*var(--intensity)));} 100%{transform:none;} }
+@keyframes micro-n { 0%{transform:none;} 50%{transform: skewX(calc(-7deg*var(--intensity))) translateY(calc(-4px*var(--intensity)));} 100%{transform:none;} }
+@keyframes micro-o { 0%{transform:none;} 50%{transform: rotate(calc(18deg*var(--intensity))) scale(calc(1.08*var(--intensity)));} 100%{transform:none;} }
+@keyframes micro-p { 0%{transform:none;} 50%{transform: translateY(calc(-9px*var(--intensity))) rotate(calc(9deg*var(--intensity)));} 100%{transform:none;} }
+@keyframes micro-q { 0%{transform:none;} 50%{transform: translate(calc(-6px*var(--intensity)), calc(-6px*var(--intensity))) rotate(calc(-6deg*var(--intensity)));} 100%{transform:none;} }
+@keyframes micro-r { 0%{transform:none;} 50%{transform: rotate(calc(-10deg*var(--intensity))) translateY(calc(-6px*var(--intensity)));} 100%{transform:none;} }
+@keyframes micro-s { 0%{transform:none;} 50%{transform: translateX(calc(8px*var(--intensity))) scale(calc(1.05*var(--intensity)));} 100%{transform:none;} }
+@keyframes micro-t { 0%{transform:none;} 50%{transform: rotate(calc(12deg*var(--intensity))) translateY(calc(-3px*var(--intensity)));} 100%{transform:none;} }
+@keyframes micro-u { 0%{transform:none;} 50%{transform: translateY(calc(-8px*var(--intensity))) rotate(calc(-8deg*var(--intensity)));} 100%{transform:none;} }
+@keyframes micro-v { 0%{transform:none;} 50%{transform: translateY(calc(-9px*var(--intensity))) scale(calc(1.07*var(--intensity)));} 100%{transform:none;} }
+@keyframes micro-w { 0%{transform:none;} 50%{transform: translateX(calc(-8px*var(--intensity))) rotate(calc(8deg*var(--intensity)));} 100%{transform:none;} }
+@keyframes micro-x { 0%{transform:none;} 50%{transform: rotate(calc(-14deg*var(--intensity))) scale(calc(1.05*var(--intensity)));} 100%{transform:none;} }
+@keyframes micro-y { 0%{transform:none;} 50%{transform: translateY(calc(-6px*var(--intensity))) skewY(calc(-8deg*var(--intensity)));} 100%{transform:none;} }
+@keyframes micro-z { 0%{transform:none;} 50%{transform: translateX(calc(9px*var(--intensity))) rotate(calc(-10deg*var(--intensity)));} 100%{transform:none;} }
+@keyframes micro-0 { 0%{transform:none;} 50%{transform: rotate(calc(14deg*var(--intensity))) translateY(calc(-5px*var(--intensity)));} 100%{transform:none;} }
+@keyframes micro-1 { 0%{transform:none;} 50%{transform: translateY(calc(-10px*var(--intensity))) rotate(calc(6deg*var(--intensity)));} 100%{transform:none;} }
+@keyframes micro-2 { 0%{transform:none;} 50%{transform: translateX(calc(-9px*var(--intensity))) rotate(calc(-7deg*var(--intensity)));} 100%{transform:none;} }
+@keyframes micro-3 { 0%{transform:none;} 50%{transform: scale(calc(1.09*var(--intensity))) translateY(calc(-6px*var(--intensity)));} 100%{transform:none;} }
+@keyframes micro-4 { 0%{transform:none;} 50%{transform: skewX(calc(8deg*var(--intensity))) translateY(calc(-5px*var(--intensity)));} 100%{transform:none;} }
+@keyframes micro-5 { 0%{transform:none;} 50%{transform: rotate(calc(-14deg*var(--intensity))) translateY(calc(-8px*var(--intensity)));} 100%{transform:none;} }
+@keyframes micro-6 { 0%{transform:none;} 50%{transform: translate(calc(7px*var(--intensity)), calc(-7px*var(--intensity))) rotate(calc(10deg*var(--intensity)));} 100%{transform:none;} }
+@keyframes micro-7 { 0%{transform:none;} 50%{transform: translateY(calc(-9px*var(--intensity))) scale(calc(1.07*var(--intensity)));} 100%{transform:none;} }
+@keyframes micro-8 { 0%{transform:none;} 50%{transform: rotate(calc(16deg*var(--intensity))) scale(calc(1.05*var(--intensity)));} 100%{transform:none;} }
+@keyframes micro-9 { 0%{transform:none;} 50%{transform: translateX(calc(-7px*var(--intensity))) rotate(calc(12deg*var(--intensity)));} 100%{transform:none;} }
+
+/* Full tricks */
+@keyframes full-a { 0%{transform:none;} 30%{transform: translateY(calc(-32px*var(--intensity))) rotate(calc(26deg*var(--intensity))) scale(calc(1.08*var(--intensity)));} 65%{transform: translateY(calc(6px*var(--intensity))) rotate(calc(-8deg*var(--intensity)));} 100%{transform:none;} }
+@keyframes full-b { 0%{transform:none;} 35%{transform: translateX(calc(26px*var(--intensity))) rotate(calc(-24deg*var(--intensity)));} 70%{transform: translateX(calc(-8px*var(--intensity))) rotate(calc(8deg*var(--intensity)));} 100%{transform:none;} }
+@keyframes full-c { 0%{transform:none;} 32%{transform: scale(calc(1.2*var(--intensity))) rotate(calc(-18deg*var(--intensity))) translateY(calc(-16px*var(--intensity)));} 70%{transform: scale(calc(0.94*var(--intensity))) rotate(calc(8deg*var(--intensity)));} 100%{transform:none;} }
+@keyframes full-d { 0%{transform:none;} 40%{transform: rotate(calc(220deg*var(--intensity))) scale(calc(1.04*var(--intensity)));} 70%{transform: rotate(calc(260deg*var(--intensity))) translateY(calc(8px*var(--intensity)));} 100%{transform:none;} }
+@keyframes full-e { 0%{transform:none;} 30%{transform: translateY(calc(-26px*var(--intensity))) skewX(calc(18deg*var(--intensity)));} 60%{transform: translateY(calc(14px*var(--intensity))) skewX(calc(-10deg*var(--intensity)));} 100%{transform:none;} }
+@keyframes full-f { 0%{transform:none;} 28%{transform: translateX(calc(-34px*var(--intensity))) rotate(calc(18deg*var(--intensity)));} 60%{transform: translateX(calc(12px*var(--intensity))) rotate(calc(-10deg*var(--intensity)));} 100%{transform:none;} }
+@keyframes full-g { 0%{transform:none;} 30%{transform: translate(calc(20px*var(--intensity)), calc(-30px*var(--intensity))) rotate(calc(22deg*var(--intensity)));} 65%{transform: translate(calc(-8px*var(--intensity)), calc(12px*var(--intensity))) rotate(calc(-8deg*var(--intensity)));} 100%{transform:none;} }
+@keyframes full-h { 0%{transform:none;} 35%{transform: skewY(calc(16deg*var(--intensity))) translateY(calc(-20px*var(--intensity))) scaleY(calc(1.08*var(--intensity)));} 70%{transform: skewY(calc(-10deg*var(--intensity))) translateY(calc(10px*var(--intensity)));} 100%{transform:none;} }
+@keyframes full-i { 0%{transform:none;} 30%{transform: scale(calc(1.22*var(--intensity))) translateY(calc(-22px*var(--intensity)));} 65%{transform: scale(calc(0.96*var(--intensity))) translateY(calc(10px*var(--intensity)));} 100%{transform:none;} }
+@keyframes full-j { 0%{transform:none;} 32%{transform: translateY(calc(-34px*var(--intensity))) rotate(calc(-28deg*var(--intensity))) scale(calc(1.08*var(--intensity)));} 68%{transform: translateY(calc(12px*var(--intensity))) rotate(calc(10deg*var(--intensity)));} 100%{transform:none;} }
+@keyframes full-k { 0%{transform:none;} 34%{transform: rotate(calc(-32deg*var(--intensity))) translateX(calc(-18px*var(--intensity))) scale(calc(1.05*var(--intensity)));} 72%{transform: rotate(calc(16deg*var(--intensity))) translateX(calc(10px*var(--intensity)));} 100%{transform:none;} }
+@keyframes full-l { 0%{transform:none;} 32%{transform: translateY(calc(-30px*var(--intensity))) scale(calc(1.12*var(--intensity)));} 68%{transform: translateY(calc(10px*var(--intensity))) rotate(calc(-10deg*var(--intensity)));} 100%{transform:none;} }
+@keyframes full-m { 0%{transform:none;} 30%{transform: translate(calc(24px*var(--intensity)), calc(-16px*var(--intensity))) rotate(calc(16deg*var(--intensity)));} 60%{transform: translate(calc(-20px*var(--intensity)), calc(-18px*var(--intensity))) rotate(calc(-14deg*var(--intensity)));} 100%{transform:none;} }
+@keyframes full-n { 0%{transform:none;} 34%{transform: skewX(calc(-16deg*var(--intensity))) translateY(calc(-22px*var(--intensity)));} 70%{transform: skewX(calc(10deg*var(--intensity))) translateY(calc(8px*var(--intensity)));} 100%{transform:none;} }
+@keyframes full-o { 0%{transform:none;} 38%{transform: rotate(calc(280deg*var(--intensity))) scale(calc(1.15*var(--intensity)));} 72%{transform: rotate(calc(320deg*var(--intensity))) translateY(calc(10px*var(--intensity)));} 100%{transform:none;} }
+@keyframes full-p { 0%{transform:none;} 32%{transform: translateY(calc(-32px*var(--intensity))) rotate(calc(24deg*var(--intensity))) scale(calc(1.08*var(--intensity)));} 66%{transform: translateY(calc(14px*var(--intensity))) rotate(calc(-12deg*var(--intensity)));} 100%{transform:none;} }
+@keyframes full-q { 0%{transform:none;} 30%{transform: translate(calc(-22px*var(--intensity)), calc(-24px*var(--intensity))) rotate(calc(-20deg*var(--intensity)));} 64%{transform: translate(calc(10px*var(--intensity)), calc(12px*var(--intensity))) rotate(calc(10deg*var(--intensity)));} 100%{transform:none;} }
+@keyframes full-r { 0%{transform:none;} 32%{transform: rotate(calc(-26deg*var(--intensity))) translateY(calc(-22px*var(--intensity))) scale(calc(1.06*var(--intensity)));} 68%{transform: rotate(calc(16deg*var(--intensity))) translateY(calc(8px*var(--intensity)));} 100%{transform:none;} }
+@keyframes full-s { 0%{transform:none;} 34%{transform: translateX(calc(26px*var(--intensity))) scale(calc(1.12*var(--intensity)));} 70%{transform: translateX(calc(-16px*var(--intensity))) rotate(calc(12deg*var(--intensity)));} 100%{transform:none;} }
+@keyframes full-t { 0%{transform:none;} 30%{transform: rotate(calc(32deg*var(--intensity))) translateY(calc(-20px*var(--intensity))) scale(calc(1.05*var(--intensity)));} 65%{transform: rotate(calc(-14deg*var(--intensity))) translateY(calc(10px*var(--intensity)));} 100%{transform:none;} }
+@keyframes full-u { 0%{transform:none;} 32%{transform: translateY(calc(-30px*var(--intensity))) rotate(calc(-18deg*var(--intensity))) scale(calc(1.1*var(--intensity)));} 68%{transform: translateY(calc(12px*var(--intensity))) rotate(calc(12deg*var(--intensity)));} 100%{transform:none;} }
+@keyframes full-v { 0%{transform:none;} 34%{transform: translateY(calc(-34px*var(--intensity))) scale(calc(1.14*var(--intensity))) rotate(calc(-10deg*var(--intensity)));} 70%{transform: translateY(calc(10px*var(--intensity))) rotate(calc(10deg*var(--intensity)));} 100%{transform:none;} }
+@keyframes full-w { 0%{transform:none;} 32%{transform: translateX(calc(-26px*var(--intensity))) rotate(calc(18deg*var(--intensity))) scale(calc(1.08*var(--intensity)));} 68%{transform: translateX(calc(12px*var(--intensity))) rotate(calc(-12deg*var(--intensity)));} 100%{transform:none;} }
+@keyframes full-x { 0%{transform:none;} 35%{transform: rotate(calc(-32deg*var(--intensity))) scale(calc(1.12*var(--intensity)));} 68%{transform: rotate(calc(18deg*var(--intensity))) translateY(calc(8px*var(--intensity)));} 100%{transform:none;} }
+@keyframes full-y { 0%{transform:none;} 30%{transform: translateY(calc(-24px*var(--intensity))) skewY(calc(-16deg*var(--intensity))) scale(calc(1.08*var(--intensity)));} 64%{transform: translateY(calc(12px*var(--intensity))) skewY(calc(12deg*var(--intensity)));} 100%{transform:none;} }
+@keyframes full-z { 0%{transform:none;} 32%{transform: translateX(calc(28px*var(--intensity))) rotate(calc(-26deg*var(--intensity))) scale(calc(1.08*var(--intensity)));} 68%{transform: translateX(calc(-14px*var(--intensity))) rotate(calc(12deg*var(--intensity)));} 100%{transform:none;} }
+@keyframes full-0 { 0%{transform:none;} 36%{transform: rotate(calc(320deg*var(--intensity))) translateY(calc(-16px*var(--intensity))) scale(calc(1.1*var(--intensity)));} 70%{transform: rotate(calc(360deg*var(--intensity))) translateY(calc(10px*var(--intensity)));} 100%{transform:none;} }
+@keyframes full-1 { 0%{transform:none;} 32%{transform: translateY(calc(-36px*var(--intensity))) rotate(calc(16deg*var(--intensity))) scale(calc(1.06*var(--intensity)));} 68%{transform: translateY(calc(12px*var(--intensity))) rotate(calc(-10deg*var(--intensity)));} 100%{transform:none;} }
+@keyframes full-2 { 0%{transform:none;} 30%{transform: translateX(calc(-32px*var(--intensity))) rotate(calc(-22deg*var(--intensity))) scale(calc(1.08*var(--intensity)));} 66%{transform: translateX(calc(14px*var(--intensity))) rotate(calc(12deg*var(--intensity)));} 100%{transform:none;} }
+@keyframes full-3 { 0%{transform:none;} 32%{transform: scale(calc(1.22*var(--intensity))) rotate(calc(18deg*var(--intensity))) translateY(calc(-20px*var(--intensity)));} 68%{transform: scale(calc(0.94*var(--intensity))) rotate(calc(-10deg*var(--intensity)));} 100%{transform:none;} }
+@keyframes full-4 { 0%{transform:none;} 34%{transform: skewX(calc(18deg*var(--intensity))) translateY(calc(-20px*var(--intensity))) scale(calc(1.06*var(--intensity)));} 70%{transform: skewX(calc(-12deg*var(--intensity))) translateY(calc(12px*var(--intensity)));} 100%{transform:none;} }
+@keyframes full-5 { 0%{transform:none;} 32%{transform: rotate(calc(-32deg*var(--intensity))) translateY(calc(-26px*var(--intensity))) scale(calc(1.1*var(--intensity)));} 70%{transform: rotate(calc(14deg*var(--intensity))) translateY(calc(10px*var(--intensity)));} 100%{transform:none;} }
+@keyframes full-6 { 0%{transform:none;} 34%{transform: translate(calc(22px*var(--intensity)), calc(-26px*var(--intensity))) rotate(calc(22deg*var(--intensity))) scale(calc(1.08*var(--intensity)));} 68%{transform: translate(calc(-12px*var(--intensity)), calc(12px*var(--intensity))) rotate(calc(-12deg*var(--intensity)));} 100%{transform:none;} }
+@keyframes full-7 { 0%{transform:none;} 30%{transform: translateY(calc(-34px*var(--intensity))) scale(calc(1.14*var(--intensity))) rotate(calc(-10deg*var(--intensity)));} 66%{transform: translateY(calc(12px*var(--intensity))) rotate(calc(8deg*var(--intensity)));} 100%{transform:none;} }
+@keyframes full-8 { 0%{transform:none;} 36%{transform: rotate(calc(260deg*var(--intensity))) scale(calc(1.14*var(--intensity))) translateY(calc(-18px*var(--intensity)));} 70%{transform: rotate(calc(300deg*var(--intensity))) translateY(calc(10px*var(--intensity)));} 100%{transform:none;} }
+@keyframes full-9 { 0%{transform:none;} 32%{transform: translateX(calc(-26px*var(--intensity))) rotate(calc(24deg*var(--intensity))) scale(calc(1.08*var(--intensity)));} 68%{transform: translateX(calc(12px*var(--intensity))) rotate(calc(-14deg*var(--intensity)));} 100%{transform:none;} }
+
+@media (max-width: 840px) {
+  .spotlight {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+  .spotlight-letter {
+    justify-self: center;
+  }
+}
+
+@media (max-width: 640px) {
+  .specimen-tile {
+    height: 74px;
+  }
+  .control-bar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 }
