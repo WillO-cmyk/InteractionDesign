@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Rad Character Highlight</title>
+  <link rel="stylesheet" href="https://use.typekit.net/lqa7gax.css">
+  <link rel="stylesheet" href="ch.css">
+</head>
+<body>
+  <div class="page-shell">
+    <header class="specimen-hero">
+      <p class="eyebrow">Rad Font</p>
+      <h1 class="gradient-text">Character Highlight</h1>
+      <p>Hover to preview each skater’s trick. Click to spotlight and run the full animation once, then it chills in idle. Use Intensity to crank the motion.</p>
+    </header>
+
+    <div class="control-bar">
+      <label for="intensity">Intensity</label>
+      <input type="range" id="intensity" min="0.6" max="1.6" step="0.05" value="1">
+      <span class="value" id="intensityValue">1.00x</span>
+      <span class="sr-only">Arrow keys move focus, Enter/Space selects a character</span>
+    </div>
+
+    <div class="specimen-grid" id="specimenGrid" role="grid" aria-label="Rad character set"></div>
+
+    <div class="spotlight" aria-live="polite">
+      <div class="spotlight-letter" id="spotlightLetter" aria-hidden="true">A</div>
+      <div class="spotlight-meta">
+        <p class="label">Selected</p>
+        <p class="trick-name" id="spotlightName">Pick a character</p>
+        <p class="hint">Arrow keys navigate · Enter/Space selects · Intensity boosts motion</p>
+      </div>
+    </div>
+
+    <div class="home-row">
+      <a class="btn" href="index.html">Return to Homepage</a>
+    </div>
+  </div>
+
+  <script>
+    const characters = [
+      { char: 'A', trick: 'Kickflip Arc', className: 'trick-a' },
+      { char: 'B', trick: 'Shuv Transfer', className: 'trick-b' },
+      { char: 'C', trick: 'Heel Whip', className: 'trick-c' },
+      { char: 'D', trick: 'Cab 360', className: 'trick-d' },
+      { char: 'E', trick: 'Nose Manual', className: 'trick-e' },
+      { char: 'F', trick: 'Tail Slide', className: 'trick-f' },
+      { char: 'G', trick: 'Arc Grind', className: 'trick-g' },
+      { char: 'H', trick: 'Wall Tap', className: 'trick-h' },
+      { char: 'I', trick: 'Blunt Pop', className: 'trick-i' },
+      { char: 'J', trick: 'Late Flip', className: 'trick-j' },
+      { char: 'K', trick: 'Stalefish Twist', className: 'trick-k' },
+      { char: 'L', trick: 'Boneless', className: 'trick-l' },
+      { char: 'M', trick: 'Carve Flick', className: 'trick-m' },
+      { char: 'N', trick: 'Slide Flick', className: 'trick-n' },
+      { char: 'O', trick: 'Rocket Spin', className: 'trick-o' },
+      { char: 'P', trick: 'Nollie Pop', className: 'trick-p' },
+      { char: 'Q', trick: 'Ledge Hop', className: 'trick-q' },
+      { char: 'R', trick: 'Revert Flick', className: 'trick-r' },
+      { char: 'S', trick: 'Surf Slide', className: 'trick-s' },
+      { char: 'T', trick: 'Crail Dip', className: 'trick-t' },
+      { char: 'U', trick: 'Nose Blunt', className: 'trick-u' },
+      { char: 'V', trick: 'Mega Ollie', className: 'trick-v' },
+      { char: 'W', trick: 'Tail Whip', className: 'trick-w' },
+      { char: 'X', trick: 'Crossbone', className: 'trick-x' },
+      { char: 'Y', trick: 'Yank Spin', className: 'trick-y' },
+      { char: 'Z', trick: 'Zip Grind', className: 'trick-z' },
+      { char: '0', trick: 'Zero Spin', className: 'trick-0' },
+      { char: '1', trick: 'One Foot', className: 'trick-1' },
+      { char: '2', trick: 'Two-Step', className: 'trick-2' },
+      { char: '3', trick: 'Triple Pump', className: 'trick-3' },
+      { char: '4', trick: 'Quarter Pipe', className: 'trick-4' },
+      { char: '5', trick: 'Five-O Grind', className: 'trick-5' },
+      { char: '6', trick: 'Six Spin', className: 'trick-6' },
+      { char: '7', trick: 'Seven Stair', className: 'trick-7' },
+      { char: '8', trick: 'Figure Eight', className: 'trick-8' },
+      { char: '9', trick: 'Nine Flip', className: 'trick-9' }
+    ];
+
+    const grid = document.getElementById('specimenGrid');
+    const spotlightLetter = document.getElementById('spotlightLetter');
+    const spotlightName = document.getElementById('spotlightName');
+    const intensitySlider = document.getElementById('intensity');
+    const intensityValue = document.getElementById('intensityValue');
+    let tiles = [];
+
+    function buildGrid() {
+      characters.forEach((item, index) => {
+        const tile = document.createElement('button');
+        tile.type = 'button';
+        tile.className = `specimen-tile ${item.className}`;
+        tile.textContent = item.char;
+        tile.dataset.trick = item.trick;
+        tile.dataset.index = index;
+        tile.setAttribute('role', 'gridcell');
+        tile.setAttribute('aria-label', `${item.char}: ${item.trick}`);
+        tile.tabIndex = index === 0 ? 0 : -1;
+        tile.addEventListener('click', () => selectTile(index, true));
+        tile.addEventListener('keydown', (e) => handleKey(e, index));
+        grid.appendChild(tile);
+      });
+      tiles = Array.from(grid.querySelectorAll('.specimen-tile'));
+      selectTile(0, false);
+    }
+
+    function handleKey(e, index) {
+      const cols = Math.max(1, Math.floor(grid.clientWidth / 90));
+      let target = index;
+      if (e.key === 'ArrowRight') { target = (index + 1) % tiles.length; e.preventDefault(); }
+      if (e.key === 'ArrowLeft') { target = (index - 1 + tiles.length) % tiles.length; e.preventDefault(); }
+      if (e.key === 'ArrowDown') { target = (index + cols) % tiles.length; e.preventDefault(); }
+      if (e.key === 'ArrowUp') { target = (index - cols + tiles.length) % tiles.length; e.preventDefault(); }
+      if (target !== index) {
+        focusTile(target);
+        return;
+      }
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        selectTile(index, true);
+      }
+    }
+
+    function focusTile(index) {
+      tiles.forEach((tile, i) => tile.tabIndex = i === index ? 0 : -1);
+      tiles[index].focus();
+    }
+
+    function selectTile(index, triggerAnimation) {
+      tiles.forEach((tile, i) => {
+        tile.classList.toggle('selected', i === index);
+        tile.tabIndex = i === index ? 0 : -1;
+      });
+      const selected = characters[index];
+      spotlightLetter.textContent = selected.char;
+      spotlightLetter.className = `spotlight-letter ${selected.className}`;
+      spotlightName.textContent = `${selected.char} – ${selected.trick}`;
+
+      if (triggerAnimation) {
+        animateOnce(tiles[index]);
+        animateOnce(spotlightLetter);
+      }
+    }
+
+    function animateOnce(el) {
+      el.classList.remove('run');
+      void el.offsetWidth;
+      el.classList.add('run');
+      el.addEventListener('animationend', () => el.classList.remove('run'), { once: true });
+    }
+
+    intensitySlider.addEventListener('input', () => {
+      const value = Number(intensitySlider.value).toFixed(2);
+      document.documentElement.style.setProperty('--intensity', value);
+      intensityValue.textContent = `${Number(value).toFixed(2)}x`;
+    });
+
+    buildGrid();
+  </script>
+</body>
+</html>
