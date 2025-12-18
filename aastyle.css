@@ -227,15 +227,15 @@ body {
   transform: translate(0,0);
 }
 
-.card1 { background-image: url("images/Capture1.PNG"), linear-gradient(135deg, #ff7f50, #ffb347); }
-.card2 { background-image: url("images/Capture2.PNG"), linear-gradient(135deg, #1db954, #0f9b4c); }
-.card3 { background-image: url("images/Capture3.PNG"), linear-gradient(135deg, #ef233c, #9d0208); }
-.card4 { background-image: url("images/Capture4.PNG"), linear-gradient(135deg, #ff6b35, #faae42); }
-.card5 { background-image: url("images/Capture5.PNG"), linear-gradient(135deg, #b5179e, #7209b7); }
-.card6 { background-image: url("images/Capture6.PNG"), linear-gradient(135deg, #4361ee, #4895ef); }
-.card7 { background-image: url("images/Capture7.PNG"), linear-gradient(135deg, #06d6a0, #1b9aaa); }
-.card8 { background-image: url("images/Capture8.PNG"), linear-gradient(135deg, #ff6b6b, #ffa69e); }
-.card9 { background-image: url("images/Capture9.PNG"), linear-gradient(135deg, #ffb703, #fb8500); }
+.card1 { background-image: url("images/capture1.PNG"), linear-gradient(135deg, #ff7f50, #ffb347); }
+.card2 { background-image: url("images/capture2.PNG"), linear-gradient(135deg, #1db954, #0f9b4c); }
+.card3 { background-image: url("images/capture3.PNG"), linear-gradient(135deg, #ef233c, #9d0208); }
+.card4 { background-image: url("images/capture4.PNG"), linear-gradient(135deg, #ff6b35, #faae42); }
+.card5 { background-image: url("images/capture5.PNG"), linear-gradient(135deg, #b5179e, #7209b7); }
+.card6 { background-image: url("images/capture6.PNG"), linear-gradient(135deg, #4361ee, #4895ef); }
+.card7 { background-image: url("images/capture7.PNG"), linear-gradient(135deg, #06d6a0, #1b9aaa); }
+.card8 { background-image: url("images/capture8.PNG"), linear-gradient(135deg, #ff6b6b, #ffa69e); }
+.card9 { background-image: url("images/capture9.PNG"), linear-gradient(135deg, #ffb703, #fb8500); }
 
 .deck-controls {
   display: flex;
