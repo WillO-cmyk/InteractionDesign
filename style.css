@@ -174,3 +174,9 @@ text-shadow:
   p1 { font-size: 18px; }
   .btn { width: 100%; text-align: center; }
 }
+
+@media (min-width: 1600px) {
+  body { padding: 0 32px; }
+  .body-box { width: min(1200px, 80vw); }
+  .home-buttons { gap: 14px; }
+}
