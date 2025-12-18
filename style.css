@@ -36,8 +36,14 @@ h1 {
   font-family: "rad", sans-serif;
   font-weight: 400;
   font-style: normal;
-  /* fluid scaling: min 48px, preferred 10vw, max 200px */
-  font-size: clamp(48px, 10vw, 200px);
+  /* fluid scaling: min 64px, preferred 11vw, max 240px */
+  font-size: clamp(64px, 11vw, 240px);
+  /* high-contrast fill with a soft outline so letters stay legible on collage */
+  color: #fdf8f3;
+  text-shadow:
+    0 0 8px rgba(0, 0, 0, 0.28),
+    0 6px 18px rgba(0, 0, 0, 0.35),
+    0 0 1px rgba(0, 0, 0, 0.65);
 }
 
 #Radfonto { animation: spin 2.00s linear infinite; }
@@ -52,13 +58,32 @@ p1 {font-family: "rad", sans-serif;
   /* fluid size for p1 */
   font-size: clamp(18px, 4vw, 50px);
   font-style: normal;
+  color: #fdf8f3;
+  text-shadow:
+    0 0 6px rgba(0, 0, 0, 0.3),
+    0 4px 12px rgba(0, 0, 0, 0.35),
+    0 0 1px rgba(0, 0, 0, 0.55);
 }
 
 p{font-family: helvetica;
 font-weight: 300;
 font-size: 20px;
+color: #fdf8f3;
+text-shadow:
+  0 0 4px rgba(0, 0, 0, 0.28),
+  0 3px 10px rgba(0, 0, 0, 0.32),
+  0 0 1px rgba(0, 0, 0, 0.5);
+}
 
-
+.body-box {
+  width: min(1100px, 90vw);
+  margin: 20px auto 0;
+  padding: 18px 22px;
+  background: rgba(17, 17, 17, 0.48);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 16px;
+  box-shadow: 0 18px 38px rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(4px);
 }
 /* 🎵 Music player styling */
 .music-player {
