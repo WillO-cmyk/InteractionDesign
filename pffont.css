@@ -79,7 +79,7 @@ body {
   text-shadow: 2px 2px 0 #00000033;
   position: relative;
   left: 0;
-  animation: jump 4s ease-in-out infinite;
+  animation: jump 6s ease-in-out infinite;
 }
 
 .bg-floaters {
