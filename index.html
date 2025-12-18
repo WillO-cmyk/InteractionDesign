@@ -3,62 +3,157 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>John Ritter</title>
-	<link rel="stylesheet" type="text/css" href="style.css">
-	<link rel="stylesheet" href="https://use.typekit.net/lqa7gax.css">
+	
+	<title>About the Artist</title>
 
+	<link rel="stylesheet" type="text/css" href="aastyle.css">
+	<link rel="stylesheet" href="https://use.typekit.net/lqa7gax.css">
 </head>
+
 <body>
 
+	<div class="artist-page">
+
+		<!-- Top: Diamond photo + titles -->
+		<header class="artist-header">
+			<img id="img1" src="images/jonritter.jpeg.png" alt="John Ritter">
+			
+			<div class="titles">
+				<h1 class="rad-head">About the Artist</h1>
+				<h2 class="rad-sub">John Ritter</h2>
+			</div>
+		</header>
+
+		<!-- Info block -->
+		<section class="artist-info">
+			<p>
+				John Ritter is a designer known for his font, Rad, which he created for Adobe Fonts and MyFonts. 
+				He adapted Rad from a skateboard alphabet he made for a college assignment and worked at Adobe 
+				before opening his own studio. His typography is characterized by its unique, illustrative style.
+			</p>
+			<p class="info-grid">
+				<span><strong>Designer:</strong> John Ritter</span>
+				<span><strong>Most Famous Font:</strong> Rad</span>
+				<span><strong>Origin:</strong> Skateboard alphabet (college assignment)</span>
+				<span><strong>Context:</strong> Rad captures the "no rules" skateboard spirit</span>
+				<span><strong>Availability:</strong> Adobe Fonts, MyFonts</span>
+				<span><strong>Background:</strong> Ex-Adobe; founder of Ritter Illustration</span>
+			</p>
+		</section>
+
+		<!-- STACKED FONT SHOWCASE BOXES -->
+		<div class="layout">
+
+		  <!-- Box 1: Alphabet line -->
+		  <div class="block block1">
+		  	<div id="Alphabet" class="rad-specimen">ABCDEFGHIJKLMNOPQRSTUVWXYZ</div>
+		  </div>
+
+		  <!-- Box 2: Numbers / any extra info -->
+		  <div class="block block2">
+		  	<div class="numbers-line rad-specimen">0123456789</div>
+		  	<p class="block-caption">
+		  		Numbers shown in the Rad typeface, reflecting the same playful, skater-inspired energy.
+		  	</p>
+		  </div>
+
+		  <!-- Box 3: multi-size specimen -->
+		  <div class="block block4">
+		    <div class="block4-inner">
+
+		      <p class="block4-info">
+		        You can find Rad and other works by designer John Ritter on Adobe Fonts and MyFonts.
+		      </p>
+
+		      <div class="specimen-group">
+		        <div class="specimen-label">Alphabet</div>
+		        <div class="specimen sample-large rad-specimen">ABCDEFGHIJKLMNOPQRSTUVWXYZ</div>
+		        <div class="specimen sample-medium rad-specimen">ABCDEFGHIJKLMNOPQRSTUVWXYZ</div>
+		        <div class="specimen sample-small rad-specimen">ABCDEFGHIJKLMNOPQRSTUVWXYZ</div>
+		      </div>
+
+		      <div class="specimen-group">
+		        <div class="specimen-label">Numbers</div>
+		        <div class="specimen sample-large rad-specimen">0123456789</div>
+		        <div class="specimen sample-medium rad-specimen">0123456789</div>
+		        <div class="specimen sample-small rad-specimen">0123456789</div>
+		      </div>
+
+		    </div>
+		  </div>
+
+		</div> <!-- end .layout -->
+
+		<!-- Ritter Illustrations deck preview -->
+		<section class="ritter-deck" id="ritter-illustrations">
+			<div class="deck-header">
+				<div class="eyebrow">Illustration Preview</div>
+				<h3 class="deck-title rad-head">Ritter Illustrations</h3>
+				<p class="deck-copy">Flip through a few panels to preview Ritter's illustration vibe. Hover to feel the stack lift; click the arrows to flip. The button opens the full site.</p>
+				<a class="btn return-home" href="https://ritterillustration.com" target="_blank" rel="noopener">Visit RitterIllustration.com</a>
+			</div>
+			<div class="deck-view">
+				<div class="deck-stack" id="deckStack" aria-label="Ritter Illustrations deck preview">
+					<div class="card card1"></div>
+					<div class="card card2"></div>
+					<div class="card card3"></div>
+					<div class="card card4"></div>
+					<div class="card card5"></div>
+					<div class="card card6"></div>
+					<div class="card card7"></div>
+					<div class="card card8"></div>
+					<div class="card card9"></div>
+				</div>
+				<div class="deck-controls" aria-label="Deck controls">
+					<button class="deck-btn" id="prevDeck" aria-label="Previous illustration">&lt;</button>
+					<button class="deck-btn" id="nextDeck" aria-label="Next illustration">&gt;</button>
+				</div>
+			</div>
+		</section>
 
 
-<div id="container">
-	<div id="Radfontr"> R </div>
-	<div id="Radfonta"> a </div>
-	<div id="Radfontd"> d </div>
-	<div id="Radfontf"> F </div>
-	<div id="Radfonto"> o </div>
-	<div id="Radfontn"> n </div>
-	<div id="Radfontt"> t </div>
-</div>
 
-<div id="container">
-<p1>
+		<!-- Bottom links -->
+		<div class="artist-links">
+			
+			<a href="index.html" class="btn return-home">
+				Return to Homepage
+			</a>
+		</div>
 
-	ABCDEFGHIJKLMNOPQRSTUVWXYZ123456789
-</p1>
+	</div>
 
-</div>
+	<script>
+		// Simple deck flip interaction
+		const stack = document.getElementById('deckStack');
+		const cards = stack ? Array.from(stack.querySelectorAll('.card')) : [];
+		let topIndex = 0;
 
-<p>
-	John Ritter is a designer known for his font, Rad, which he created for Adobe Fonts and MyFonts. He adapted Rad from a skateboard alphabet he made for a college assignment and worked at Adobe before opening his own studio. His typography is characterized by its unique, illustrative style, as seen in the Rad typeface. Ar
-Key Information &
-ƒ?› Designer: John Ritter
-ƒ?› Most Famous Font: Rad
-ƒ?› Origin of Rad: Adapted from a skateboard alphabet
-ƒ?› Context: Created for a college design assignment
-ƒ?› Affiliation: Designed for Adobe Fonts and available on MyFonts
-ƒ?› Background: Worked at Adobe Systems and later opened his own studio " Ritterillustration"
-</p>
+		function renderStack() {
+			cards.forEach((card, i) => {
+				const order = (i - topIndex + cards.length) % cards.length;
+				card.style.setProperty('--order', order);
+				card.setAttribute('aria-hidden', order !== 0 ? 'true' : 'false');
+				card.classList.toggle('is-top', order === 0);
+			});
+		}
 
-		<p>Designer John Ritter created the font . He adapted Rad from a skateboard alphabet that he created for a college design assignment. In Rad, he captures the "no rules" spirit of the skateboard scene-one John was rolled up in when he wasn't busy studying. Rad is part of the Linotype Library. Rad is a trademark of Adobe Systems Incorporated which may be registered in certain jurisdictions.
-		</p>
+		function nextCard() {
+			topIndex = (topIndex + 1) % cards.length;
+			renderStack();
+		}
 
+		function prevCard() {
+			topIndex = (topIndex - 1 + cards.length) % cards.length;
+			renderStack();
+		}
 
-				<p>
-					Design inspiration: He developed it from a skateboard-themed alphabet he made for a college assignment.
-Styling: Rad is described as capturing the "no rules" spirit of the skateboarding scene.
-Availability: Rad is part of the Linotype Library and is a trademark of Adobe Systems Incorporated. You can find it and other works by the designer John Ritter on Adobe Fonts and MyFonts
-				</p>
+		document.getElementById('nextDeck')?.addEventListener('click', nextCard);
+		document.getElementById('prevDeck')?.addEventListener('click', prevCard);
+		stack?.addEventListener('mouseenter', () => stack.classList.add('hovering'));
+		stack?.addEventListener('mouseleave', () => stack.classList.remove('hovering'));
 
-
-<div class="home-buttons">
-  
-    <a href="aboutartist.html" class="btn">About Artist</a>
-    <a href="playfulfont.html" class="btn">Playful Font</a>
-    <a href="characterhighlight.html" class="btn">Character Highlight</a>
-</div>
-
-
+		renderStack();
+	</script>
 </body>
 </html>
